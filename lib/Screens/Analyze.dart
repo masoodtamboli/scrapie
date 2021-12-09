@@ -17,41 +17,29 @@ class Analyze extends StatelessWidget {
         backgroundColor: primaryColor,
       ),
       body: SingleChildScrollView(
-          child: Column(
+          child: Stack(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  SizedBox(height: 70),
-                  Container(
-                    width: size.width / 3,
-                    height: 100,
-                    color: Colors.red,
-                  ),
-                ],
+          Padding(
+            padding: EdgeInsets.fromLTRB(30, 100, 30, 0),
+            child: Column(
+              children: [
+                Container(
+                  width: size.width,
+                  height: 100,
+                  color: Colors.red,
+                ),
+              ],
+            ),
+          ),
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.center,
+              child: Container(
+                width: 150,
+                height: 100,
+                color: Colors.red,
               ),
-              Column(
-                children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    color: Colors.red,
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  SizedBox(height: 70),
-                  Container(
-                    width: 100,
-                    height: 100,
-                    color: Colors.red,
-                  ),
-                ],
-              ),
-            ],
+            ),
           )
         ],
       )),
