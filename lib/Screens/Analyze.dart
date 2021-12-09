@@ -17,32 +17,31 @@ class Analyze extends StatelessWidget {
         backgroundColor: primaryColor,
       ),
       body: SingleChildScrollView(
-          child: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(30, 100, 30, 0),
-            child: Column(
-              children: [
+        child: Container(
+            margin: EdgeInsets.symmetric(vertical: 20.0),
+            height: 130.0,
+            child: new ListView(
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                SizedBox(width: 10),
                 Container(
-                  width: size.width,
-                  height: 100,
-                  color: Colors.red,
+                  width: 180.0,
+                  color: Colors.blue,
                 ),
+                SizedBox(width: 20),
+                Container(
+                  width: 180.0,
+                  color: Colors.green,
+                ),
+                SizedBox(width: 20),
+                Container(
+                  width: 180.0,
+                  color: Colors.cyan,
+                ),
+                SizedBox(width: 20),
               ],
-            ),
-          ),
-          Positioned.fill(
-            child: Align(
-              alignment: Alignment.center,
-              child: Container(
-                width: 150,
-                height: 100,
-                color: Colors.red,
-              ),
-            ),
-          )
-        ],
-      )),
+            )),
+      ),
     );
   }
 }
@@ -74,3 +73,63 @@ class Analyze extends StatelessWidget {
 //             ),
 //           ),
 //         ),
+
+// Stack(
+//               children: [
+//                 Positioned.fill(
+//                   child: Align(
+//                     alignment: Alignment.center,
+//                     child: Container(
+//                       width: 150,
+//                       height: 100,
+//                       color: Color(0xffe1ad01),
+//                       child: Center(
+//                         child: Column(
+//                           children: [
+//                             SizedBox(height: 20),
+//                             Text("Masood Ismail Tamboli"),
+//                             SizedBox(height: 10),
+//                             Text("97%"),
+//                           ],
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//                 Padding(
+//                   padding: EdgeInsets.fromLTRB(30, 100, 30, 0),
+//                   child: Column(
+//                     children: [
+//                       Container(
+//                         width: size.width,
+//                         height: 100,
+//                         color: Color(0xffe1ad01),
+//                         child: Row(
+//                           children: [
+//                             SizedBox(width: 10),
+//                             Column(
+//                               children: [
+//                                 SizedBox(height: 20),
+//                                 Text("Masood Ismail Tamboli"),
+//                                 SizedBox(height: 10),
+//                                 Text("97%"),
+//                               ],
+//                             ),
+//                             Spacer(),
+//                             Column(
+//                               children: [
+//                                 SizedBox(height: 20),
+//                                 Text("Masood Ismail Tamboli"),
+//                                 SizedBox(height: 10),
+//                                 Text("97%"),
+//                               ],
+//                             ),
+//                             SizedBox(width: 10),
+//                           ],
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ],
+//             ),
