@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrapie/Constants/Values.dart';
+import 'package:scrapie/Controller/init.dart';
 import 'package:scrapie/Screens/Analyze.dart';
 import 'package:scrapie/Screens/Home.dart';
 import 'package:scrapie/Screens/Settings.dart';
@@ -9,7 +10,9 @@ import 'package:scrapie/Screens/View.dart';
 import 'package:scrapie/Screens/ViewStudResult.dart';
 
 // ^ Start of the app
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await init();
   runApp(
     GetMaterialApp(
       title: "Scrapie",

@@ -11,7 +11,7 @@ class View extends StatefulWidget {
 }
 
 class _ViewState extends State<View> {
-  FetchController _controller = Get.find();
+  FetchController _controller = Get.put(FetchController());
   CsvController _csvController = Get.put(CsvController());
   var path;
   late Size size;

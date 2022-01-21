@@ -1,10 +1,11 @@
-import 'package:fl_chart/fl_chart.dart';
+// import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:scrapie/Constants/Values.dart';
+import 'package:scrapie/Controller/AnalyzeController.dart';
 
 class Analyze extends StatelessWidget {
-  const Analyze({Key? key}) : super(key: key);
-
+  AnalyzeController _anaControler = Get.put(AnalyzeController());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -18,29 +19,38 @@ class Analyze extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-            margin: EdgeInsets.symmetric(vertical: 20.0),
-            height: 130.0,
-            child: new ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                SizedBox(width: 10),
-                Container(
-                  width: 180.0,
-                  color: Colors.blue,
+          margin: EdgeInsets.symmetric(vertical: 20.0),
+          height: 130.0,
+          child: new ListView(
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+              SizedBox(width: 10),
+              Container(
+                width: 180.0,
+                color: Colors.blue,
+                child: Center(
+                  child: Text("57 Students Passed"),
                 ),
-                SizedBox(width: 20),
-                Container(
-                  width: 180.0,
-                  color: Colors.green,
-                ),
-                SizedBox(width: 20),
-                Container(
-                  width: 180.0,
-                  color: Colors.cyan,
-                ),
-                SizedBox(width: 20),
-              ],
-            )),
+              ),
+              SizedBox(width: 20),
+              ElevatedButton(
+                  onPressed: () {
+                    _anaControler.Test();
+                  },
+                  child: Text("hello")),
+              Container(
+                width: 180.0,
+                color: Colors.green,
+              ),
+              SizedBox(width: 20),
+              Container(
+                width: 180.0,
+                color: Colors.cyan,
+              ),
+              SizedBox(width: 20),
+            ],
+          ),
+        ),
       ),
     );
   }

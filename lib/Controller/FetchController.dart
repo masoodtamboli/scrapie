@@ -11,6 +11,7 @@ class FetchController extends GetxController {
   String url = "";
   var completedSeats = 0.obs;
   bool interrupt = false;
+  var subjects1, header1, names, marks, percentage, totalMarks, credits;
 
   List<String> subjects = [];
   List<String> header = [];

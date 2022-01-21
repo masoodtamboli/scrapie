@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:scrapie/Controller/AnalyzeController.dart';
 
 class ViewStudResult extends StatefulWidget {
   const ViewStudResult({Key? key}) : super(key: key);
@@ -8,8 +10,12 @@ class ViewStudResult extends StatefulWidget {
 }
 
 class _ViewStudResultState extends State<ViewStudResult> {
+  AnalyzeController _anaControler = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+        body: Center(
+      child: Text("hello"),
+    ));
   }
 }
