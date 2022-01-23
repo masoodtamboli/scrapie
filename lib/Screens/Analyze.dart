@@ -1,4 +1,6 @@
 // import 'package:fl_chart/fl_chart.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrapie/Constants/Values.dart';
@@ -35,7 +37,7 @@ class Analyze extends StatelessWidget {
               SizedBox(width: 20),
               ElevatedButton(
                   onPressed: () {
-                    _anaControler.Test();
+                    _anaControler.initMethod();
                   },
                   child: Text("hello")),
               Container(
