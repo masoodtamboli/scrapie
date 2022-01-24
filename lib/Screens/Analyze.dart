@@ -151,6 +151,18 @@ class _AnalyzeState extends State<Analyze> {
     );
   }
 
+  getWidth() {
+    int size =
+        _anaControler.subjectWiseSortedStudents.values.elementAt(0).length;
+    if (size <= 20) {
+      return 700.0;
+    } else if (size >= 11 && size <= 50) {
+      return 3000.0;
+    } else if (size >= 51 && size <= 100) {
+      return 5000.0;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -216,7 +228,7 @@ class _AnalyzeState extends State<Analyze> {
                 padding: const EdgeInsets.fromLTRB(20, 20, 0, 30),
                 child: Container(
                   height: 300,
-                  width: size.width * 1.5,
+                  width: getWidth(),
                   child: generateBarChart(size),
                 ),
               ),

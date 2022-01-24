@@ -55,36 +55,42 @@ class _ViewState extends State<View> {
   }
 
   Widget _table() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: DataTable(
-          headingRowColor:
-              MaterialStateColor.resolveWith((states) => Colors.grey.shade300),
-          columns: <DataColumn>[
-            for (int i = 0; i < _controller.header.length; i++)
-              DataColumn(
-                label: Text(
-                  _controller.header[i],
-                  style: TextStyle(fontStyle: FontStyle.italic),
+    try {
+      return SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: DataTable(
+            headingRowColor: MaterialStateColor.resolveWith(
+                (states) => Colors.grey.shade300),
+            columns: <DataColumn>[
+              for (int i = 0; i < _controller.header.length; i++)
+                DataColumn(
+                  label: Text(
+                    _controller.header[i],
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
                 ),
-              ),
-          ],
-          rows: <DataRow>[
-            for (int j = 1; j < _controller.content.length; j++)
-              DataRow(
-                cells: <DataCell>[
-                  for (int i = 0; i < _controller.content[j].length; i++)
-                    DataCell(
-                      Center(child: Text(_controller.content[j][i])),
-                    ),
-                ],
-              ),
-          ],
+            ],
+            rows: <DataRow>[
+              for (int j = 1; j < _controller.content.length; j++)
+                DataRow(
+                  cells: <DataCell>[
+                    for (int i = 0; i < _controller.content[j].length; i++)
+                      DataCell(
+                        Center(child: Text(_controller.content[j][i])),
+                      ),
+                  ],
+                ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    } catch (e) {
+      return Center(
+        child: Text("Something went wrong!"),
+      );
+    }
   }
 
   Widget _empty() {
