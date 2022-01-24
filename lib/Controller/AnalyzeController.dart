@@ -7,7 +7,7 @@ class AnalyzeController extends GetxController {
   FetchController _ContentController = Get.find();
   Map<String, dynamic> contentDict = {};
   Map<String, double> classToppers = {};
-  var status = Map();
+  Map<String, dynamic> status = Map();
   var subjectWiseSortedStudents = Map();
 
   void initMethod() {
@@ -29,8 +29,7 @@ class AnalyzeController extends GetxController {
     for (int i = 0; i < contentDict['Seat Number'].length; i++) {
       if (contentDict['Percentage'][i] == "" ||
           contentDict['Percentage'][i] == null) continue;
-      temp[contentDict['Seat Number'][i]] =
-          double.parse(contentDict['Percentage'][i]);
+      temp[contentDict['Name'][i]] = double.parse(contentDict['Percentage'][i]);
     }
     //Sorting Map to get Top3 of class
     classToppers = Map.fromEntries(
