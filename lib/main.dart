@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:scrapie/AdHelper/AdHelper.dart';
 import 'package:scrapie/Constants/Values.dart';
 import 'package:scrapie/Controller/init.dart';
 import 'package:scrapie/Screens/Analyze.dart';
@@ -13,6 +17,7 @@ import 'package:scrapie/Screens/ViewStudResult.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await init();
+  MobileAds.instance.initialize();
   runApp(
     GetMaterialApp(
       title: "Scrapie",
@@ -38,6 +43,31 @@ class _ScrapieState extends State<Scrapie> {
     Settings(),
   ];
 
+  //Google Ads Variables
+  late InterstitialAd _interstitialAd;
+  bool _isInterstitialReady = false;
+
+  @override
+  void initState() {
+    super.initState();
+    InterstitialAd.load(
+      adUnitId: AdHelper.interstitialAdUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (ad) {
+        this._interstitialAd = ad;
+        _isInterstitialReady = true;
+      }, onAdFailedToLoad: (error) {
+        log("Failed to load Interstitial Ad ${error.message}");
+      }),
+    );
+  }
+
+  @override
+  void dispose() {
+    _interstitialAd.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +88,11 @@ class _ScrapieState extends State<Scrapie> {
         animationCurve: Curves.linear,
         animationDuration: Duration(milliseconds: 300),
         onTap: (index) {
+          if (index == 2) {
+            if (_isInterstitialReady) {
+              _interstitialAd.show();
+            }
+          }
           setState(() {
             _page = index;
           });

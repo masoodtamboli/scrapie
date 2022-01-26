@@ -197,9 +197,6 @@ class FetchController extends GetxController {
       }
 
       if (i == int.parse(endSeat)) {
-        content.forEach((element) {
-          log('${element}');
-        });
         Get.back();
         completedSeats.value = 0;
         interrupt = false;

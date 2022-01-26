@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'package:d_chart/d_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:scrapie/AdHelper/AdHelper.dart';
 import 'package:scrapie/Constants/Values.dart';
 import 'package:scrapie/Controller/AnalyzeController.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -17,6 +19,11 @@ class Analyze extends StatefulWidget {
 class _AnalyzeState extends State<Analyze> {
   AnalyzeController _anaControler = Get.put(AnalyzeController());
   String selectedValue = "";
+
+  void initState() {
+    super.initState();
+    _anaControler.initMethod();
+  }
 
   generateToppersWidget(Size size) {
     int count = 0;
@@ -161,12 +168,6 @@ class _AnalyzeState extends State<Analyze> {
     } else if (size >= 51 && size <= 100) {
       return 5000.0;
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _anaControler.initMethod();
   }
 
   @override

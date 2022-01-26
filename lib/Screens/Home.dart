@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:scrapie/AdHelper/AdHelper.dart';
 import 'package:scrapie/Constants/Values.dart';
 import 'package:scrapie/Controller/FetchController.dart';
 
@@ -11,6 +15,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  //Google Banner Ads Variables
+  late BannerAd _bannerAd;
+  bool _isBannerAdReady = false;
+
+  //Google Interstitial Ads Variables
+  late InterstitialAd _interstitialAd;
+  bool _isInterstitialReady = false;
+
   bool isRememberMe = false; //^ Required for Checkbox
 
   //^ Required for Form
@@ -23,6 +35,46 @@ class _HomeState extends State<Home> {
   FetchController _fetchController = Get.put(FetchController());
 
   @override
+  void initState() {
+    super.initState();
+    //Get Banner Ad
+    _bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: AdHelper.bannerAdUnitId,
+        listener: BannerAdListener(onAdLoaded: (_) {
+          setState(() {
+            _isBannerAdReady = true;
+          });
+        }, onAdFailedToLoad: (ad, error) {
+          log("Failed to load banner Ad ${error.message}");
+          _isBannerAdReady = false;
+          ad.dispose();
+        }),
+        request: AdRequest())
+      ..load();
+
+    InterstitialAd.load(
+      adUnitId: AdHelper.interstitialAdUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (ad) {
+        setState(() {
+          this._interstitialAd = ad;
+          _isInterstitialReady = true;
+        });
+      }, onAdFailedToLoad: (error) {
+        log("Failed to load Interstitial Ad ${error.message}");
+      }),
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _bannerAd.dispose();
+    _interstitialAd.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -33,6 +85,13 @@ class _HomeState extends State<Home> {
         elevation: 0,
         leading: Icon(Icons.arrow_back_outlined, color: Colors.black),
       ),
+      bottomNavigationBar: _isBannerAdReady
+          ? Container(
+              width: _bannerAd.size.width.toDouble(),
+              height: _bannerAd.size.height.toDouble(),
+              child: AdWidget(ad: _bannerAd),
+            )
+          : SizedBox(),
       body: Align(
         alignment: Alignment.center,
         child: SingleChildScrollView(
@@ -188,6 +247,10 @@ class _HomeState extends State<Home> {
         padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
         child: ElevatedButton(
           onPressed: () {
+            if (_isInterstitialReady) {
+              log('Hello');
+              _interstitialAd.show();
+            }
             //^ If conditions are valid then fetch Results
             if (_formKey.currentState!.validate()) {
               if (!(int.parse(_startSeat.text) < int.parse(_endSeat.text))) {

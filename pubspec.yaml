@@ -38,6 +38,7 @@ dependencies:
   pie_chart: ^5.1.0
   dropdown_search: ^2.0.1
   d_chart: ^0.0.4
+  google_mobile_ads: ^1.0.1
 
 dev_dependencies:
   flutter_test:
