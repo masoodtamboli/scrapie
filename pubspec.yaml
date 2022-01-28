@@ -39,6 +39,11 @@ dependencies:
   dropdown_search: ^2.0.1
   d_chart: ^0.0.4
   google_mobile_ads: ^1.0.1
+  webview_flutter: ^3.0.0
+  zoom_widget: ^0.2.1
+  firebase_core: ^1.11.0
+  cloud_firestore: ^3.1.6
+  url_launcher: ^6.0.18
 
 dev_dependencies:
   flutter_test:
@@ -59,7 +64,7 @@ flutter:
   assets:
     - assets/Images/
     - assets/Illustrations/
-
+    - assets/Icons/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

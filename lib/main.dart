@@ -1,21 +1,27 @@
 import 'dart:developer';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:scrapie/AdHelper/AdHelper.dart';
 import 'package:scrapie/Constants/Values.dart';
+import 'package:scrapie/Controller/Firestore.dart';
 import 'package:scrapie/Controller/init.dart';
 import 'package:scrapie/Screens/Analyze.dart';
 import 'package:scrapie/Screens/Home.dart';
-import 'package:scrapie/Screens/Settings.dart';
+import 'package:scrapie/Screens/Help.dart';
 import 'package:scrapie/Screens/View.dart';
 import 'package:scrapie/Screens/ViewStudResult.dart';
+import 'package:scrapie/firebase_options.dart';
 
 // ^ Start of the app
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await init();
   MobileAds.instance.initialize();
   runApp(
@@ -33,6 +39,7 @@ class Scrapie extends StatefulWidget {
 }
 
 class _ScrapieState extends State<Scrapie> {
+  FirestoreController _fireController = Get.put(FirestoreController());
   // ^ Variables required for Navigation Bar
   int _page = 0;
   List<Widget> _screens = [
@@ -40,7 +47,7 @@ class _ScrapieState extends State<Scrapie> {
     View(),
     Analyze(),
     ViewStudResult(),
-    Settings(),
+    Help(),
   ];
 
   //Google Ads Variables
@@ -50,6 +57,7 @@ class _ScrapieState extends State<Scrapie> {
   @override
   void initState() {
     super.initState();
+    _fireController.initFirestore();
     InterstitialAd.load(
       adUnitId: AdHelper.interstitialAdUnitId,
       request: AdRequest(),
